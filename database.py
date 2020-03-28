@@ -8,7 +8,8 @@ def create_connection(db_file):
         return conn
     except Error as e:
         print(e)
-    	return conn
+ 
+    return conn
 
 def create_tables(conn):
     projects_table = """CREATE TABLE IF NOT EXISTS projects (
@@ -55,9 +56,10 @@ create_tables(conn)
 volunteers, projects = parse()
 
 for project in projects:
-	c.execute('INSERT INTO projects (name, email, phone, type, host, repo, stack, languages, frameworks, category, covid, keep_updated, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-		[project[1], project[2], project[3], project[4], project[12], project[13], project[16], project[17], project[18], project[19], project[20], project[21], project[23]])
+	c.execute('INSERT INTO projects (email, ) VALUES ();', project)
 
 for volunteer in volunteers:
-	c.execute('INSERT INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-        [volunteer[1], volunteer[2], volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
+	c.execute('INSERT INTO ' + 
+        'volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) ' + 
+        'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+        [volunteer[1], volunteer[2], volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21], ])
