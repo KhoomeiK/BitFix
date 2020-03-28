@@ -36,7 +36,6 @@ def create_tables(conn):
 		                    phone text,
 		                    type text NOT NULL,
 		                    role text NOT NULL,
-		                    type text NOT NULL,
 		                    stack text NOT NULL,
 		                    languages text NOT NULL,
 		                    frameworks text NOT NULL,
@@ -57,7 +56,10 @@ create_tables(conn)
 volunteers, projects = parse()
 
 for project in projects:
-	c.execute('INSERT INTO projects () VALUES ();', project)
+	c.execute('INSERT INTO projects (email, ) VALUES ();', project)
 
 for volunteer in volunteers:
-	c.execute('INSERT INTO volunteers () VALUES ();', volunteer)
+	c.execute('INSERT INTO ' + 
+        'volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) ' + 
+        'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+        [volunteer[1], volunteer[2], volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
