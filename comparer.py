@@ -36,4 +36,5 @@ with conn:
 						assignments[vol[0]].append(issue)
 						ct += 1
 
-print(assignments) # to be passed to emailer
+# to be passed to emailer						
+print(assignments)
