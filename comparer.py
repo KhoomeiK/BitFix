@@ -2,8 +2,9 @@ import sqlite3
 from repository_reader import get_issues
 
 # keywords to check in Issues
-languages = 'Python', 'Node', 'JavaScript', 'HTML', 'CSS', 'Java', 'C', 'C++', 'C#', 'Objective C', 'Go', 'Rust', 'Swift', 'Kotlin', 'Dart', 'Ruby', 'PHP', 'SQL', 'R', 'MATLAB', 'Assembly'
-frameworks = 'Flask', 'Django', 'Express', 'React', 'Vue', 'Angular', 'React Native', 'Flutter', 'SpringBoot', '.NET', 'Rails', 'Laravel', 'WordPress', 'Unity', 'MySQL', 'Postgres', 'SQLite', 'Mongo', 'Firebase', 'Redis', 'TensorFlow', 'PyTorch', 'Keras', 'Scikit', 'Pandas'
+languages = {'Python', 'Node', 'JavaScript', 'HTML', 'CSS', 'Java', 'C', 'C++', 'C#', 'Objective C', 'Go', 'Rust', 'Swift', 'Kotlin', 'Dart', 'Ruby', 'PHP', 'SQL', 'R', 'MATLAB', 'Assembly'}
+frameworks = {'Flask', 'Django', 'Express', 'React', 'Vue', 'Angular', 'React Native', 'Flutter', 'SpringBoot', '.NET', 'Rails', 'Laravel', 'WordPress', 'Unity', 'MySQL', 'Postgres', 'SQLite', 'Mongo', 'Firebase', 'Redis', 'TensorFlow', 'PyTorch', 'Keras', 'Scikit', 'Pandas'}
+keywords = languages.union(frameworks)
 
 database = 'database.db'
 conn = sqlite3.connect(database)
@@ -27,6 +28,12 @@ with conn:
 			overlap = projTech.intersection(volTech)
 			if len(overlap) > 1:
 				print(vol[0], len(overlap))
-				assignments[vol[0]].append(issues.pop())
 
-print(assignments)
+				ct = 0
+				for issue in issues:
+					issueWords = set(issue['title'].split(' ')).union(set(issue['labels']))
+					if len(issueWords.intersection(keywords)) > 1 and ct < 3:
+						assignments[vol[0]].append(issue)
+						ct += 1
+
+print(assignments) # to be passed to emailer

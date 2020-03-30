@@ -1,5 +1,16 @@
 from gmail_api_wrapper.crud.write import GmailAPIWriteWrapper
 
+class Test:
+    def set_store(self, yeet):
+        print(vars(yeet))
+        return 'lol'
+
+    invalid = 'beast'
+
+class EmailClass:
+    def from_json(self):
+        return Test()
+
 def send_email():
 
     api = GmailAPIWriteWrapper()
@@ -20,15 +31,6 @@ def send_email():
     #     }
 
 send_email()
-
-
-
-
-
-
-
-
-
 
 
 
@@ -141,3 +143,19 @@ send_email()
 
 #   return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
+# export GAW_SCOPES="'gmail-scopes-1 'gmail-scope-2'"
+
+# # client_secret json file path
+
+# # If you're using custom SSL certs, set GAW_CA_CERTS_PEM_FILE env variable
+# export GAW_CA_CERTS_PEM_FILE="Vocalaiz-0687edf1914e.json"
+
+# # The user Id to use. Default to 'me'. A special identifier for gmail
+# # that refers to the email address used to do OAuth2 handshake
+# export GAW_USER_ID="rohan.pandey@gmail.com"
+
+# # Your preferred application name. Defaults to 'Gmail API Wrapper'
+# export GAW_APPLICATION_NAME="bitfix"
+
+# # Disable ssl certs validation. Defaults to False
+# # export GAW_DISABLE_SSL_CERTS=True
