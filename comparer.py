@@ -1,5 +1,5 @@
 import sqlite3
-from issues import fetchIssues
+from repository_reader import get_issues
 
 # keywords to check in Issues
 languages = 'Python', 'Node', 'JavaScript', 'HTML', 'CSS', 'Java', 'C', 'C++', 'C#', 'Objective C', 'Go', 'Rust', 'Swift', 'Kotlin', 'Dart', 'Ruby', 'PHP', 'SQL', 'R', 'MATLAB', 'Assembly'
@@ -19,7 +19,7 @@ with conn:
 
 	for proj in projects:
 		print(proj[0], '-----------------------')
-		issues = fetchIssues(proj[0])
+		issues = get_issues(proj[0])
 		projTech = set(proj[1].split(',') + proj[2].split(','))
 
 		for vol in volunteers:
