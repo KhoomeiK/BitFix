@@ -13,3 +13,7 @@ BitFix is a service that connects open source social good projects that need mor
 
 # Emailer
 - Sends the Issues to Volunteers over email
+- Automatically sends email to Volunteers every morning
+
+# Spreadsheet
+- Reads spreadsheet containing volunteer and project manager information directly, rather than parsing a downloaded .csv file
