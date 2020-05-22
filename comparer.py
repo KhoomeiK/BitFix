@@ -49,7 +49,10 @@ def compare():
 					for vol in volRanks:
 						if len(assignments[vol[0]]) < 3:
 							assignments[vol[0]].append(proj[0])
-
+						issueWords = set(issue['title'].split(' ')).union(set(issue['labels'])).intersection(keywords) # keywords in issue
+						if len(issueWords) > 1 and ct < 3:
+							assignments[vol[0]].append(issue) # assign issue to vol
+							ct += 1
 	return assignments
 
 # to be passed to emailer					
