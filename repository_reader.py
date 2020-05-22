@@ -49,7 +49,7 @@ def get_issues(repo):
 
 				# add each key value pair into dictionary of issues
 				issues.append({'link': issue_link, 'title': title, 'labels': labels})
-
+	# print(issues)
 	return issues
 
-get_repos()
+# get_issues('https://github.com/doc19org/medicam')
