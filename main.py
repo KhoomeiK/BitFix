@@ -11,7 +11,6 @@ from database import populate
 from comparer import compare
 
 def main():
-	
 	# populate()
 	assignments = compare()
 	print(assignments) # {volEmail: [project links]}

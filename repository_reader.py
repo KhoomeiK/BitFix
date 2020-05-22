@@ -34,21 +34,22 @@ def get_issues(repo):
 			response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
 
 			for issue in response.json():
-				url_list = issue['url'].split("/")
+				if type(issue) == dict:
+					url_list = issue['url'].split("/")
 
-				# create unique link for each issue by getting the issue number from each URL
-				issue_link = repo + "/issues/" + url_list[-1]
+					# create unique link for each issue by getting the issue number from each URL
+					issue_link = repo + "/issues/" + url_list[-1]
 
-				# save title of issue
-				title = issue['title']
+					# save title of issue
+					title = issue['title']
 
-				# populate list of labels
-				labels = []
-				for label in issue["labels"]:
-					labels.append(label["name"])
+					# populate list of labels
+					labels = []
+					for label in issue["labels"]:
+						labels.append(label["name"])
 
-				# add each key value pair into dictionary of issues
-				issues.append({'link': issue_link, 'title': title, 'labels': labels})
+					# add each key value pair into dictionary of issues
+					issues.append({'link': issue_link, 'title': title, 'labels': labels})
 	# print(issues)
 	return issues
 

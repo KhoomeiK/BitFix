@@ -20,7 +20,7 @@ def parse(file):
             else:
                 projects.append(line)
                 
-    return volunteers, managers
+    return volunteers, projects
 
 def create_connection(db_file):
     conn = None
@@ -69,22 +69,26 @@ def create_tables(c):
 
 def populate():
     database = 'database.db'
-    conn = create_connection(database)
+    # conn = create_connection(database)
 
-    with conn:
+    with create_connection(database) as conn:
         c = conn.cursor()
         create_tables(c)
 
         volunteers, projects = parse('responses.csv')
 
         for project in projects:
-            c.execute('INSERT INTO projects (name, email, phone, type, host, repo, stack, languages, frameworks, category, covid, keep_updated, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+            for i in range(len(project)):
+                if project[i] == '':
+                    project[i] = None;
+
+            c.execute('INSERT OR IGNORE INTO projects (name, email, phone, type, host, repo, stack, languages, frameworks, category, covid, keep_updated, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
                 [project[1], project[2], project[3], project[4], project[12], project[13], project[16], project[17], project[18], project[19], project[20], project[21], project[23]])
-            print(c.lastrowid)
 
         for volunteer in volunteers:
-            c.execute('INSERT INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+            for i in range(len(volunteer)):
+                if volunteer[i] == '':
+                    volunteer[i] = None;
+                    
+            c.execute('INSERT OR IGNORE INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
                 [volunteer[1], volunteer[2], volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
-            print(c.lastrowid)
-
-    conn.close()
