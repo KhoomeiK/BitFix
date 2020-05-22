@@ -36,6 +36,8 @@ def compare():
 						if len(issueWords) > 1 and ct < 3:
 							assignments[vol[0]].append(issue) # assign issue to vol
 							ct += 1
+
+	conn.close()
 	return assignments
 
 # to be passed to emailer					

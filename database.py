@@ -3,7 +3,7 @@ import sqlite3
 
 def parse(file):
     volunteers = []
-    managers = []
+    projects = []
 
     with open(file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -18,7 +18,7 @@ def parse(file):
             if "Volunteer" in line[4]:
                 volunteers.append(line)
             else:
-                managers.append(line)
+                projects.append(line)
                 
     return volunteers, managers
 
@@ -65,8 +65,7 @@ def create_tables(c):
 
     c.execute(projects_table)
     c.execute(volunteers_table)
-
-    return c
+    # return c
 
 def populate():
     database = 'database.db'
@@ -87,3 +86,5 @@ def populate():
             c.execute('INSERT INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
                 [volunteer[1], volunteer[2], volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
             print(c.lastrowid)
+
+    conn.close()
