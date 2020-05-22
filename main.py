@@ -12,8 +12,9 @@ from comparer import compare
 
 def main():
 	
-	populate()
-	compare()
+	# populate()
+	assignments = compare()
+	print(assignments) # {volEmail: [project links]}
 
 	subject = "BitFix - Personalized Github Issues for the Day!"
 
