@@ -39,4 +39,4 @@ def compare():
 	return assignments
 
 # to be passed to emailer					
-print(compare())
+# print(compare())

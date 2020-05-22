@@ -7,8 +7,14 @@
 # 	if they want to get out of their comfort zone and give it a try
 
 from emailer import run
+from database import populate
+from comparer import compare
 
 def main():
+	
+	populate()
+	compare()
+
 	subject = "BitFix - Personalized Github Issues for the Day!"
 
 	# can also add the name of the person in the hello statement later
@@ -16,9 +22,12 @@ def main():
 	Here are some issues from Github projects that require your attention!
 
 	"""
+
+
+
 	# consolidate all the emails you need to send the email to
-	emails = []
-	run(subject, msg, emails)
+	# emails = []
+	# run(subject, msg, emails)
 	# print(msg)
 
 if __name__ == '__main__':
