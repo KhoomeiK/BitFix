@@ -2,4 +2,4 @@
 /credentials.json
 /token.pickle
 /*.csv
-/*.pyc
+/__pycache__
