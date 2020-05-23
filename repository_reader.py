@@ -36,7 +36,12 @@ def get_issues(repo):
 
 	# gets the JSON String from the GitHub API
 	response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
-
+	
+	# checks if Github repo's issues link is invalid (i.e. cannot be found)
+	response_json = response.json()
+	if type(response_json) is not list and response_json['message'] == 'Not Found':
+		return None
+	
 	for issue in response.json():
 		if type(issue) == dict:
 			url_list = issue['url'].split("/")
