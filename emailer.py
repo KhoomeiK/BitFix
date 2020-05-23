@@ -22,7 +22,7 @@ from apiclient import errors
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.send']
 
-def run(email_subject, msg_txt, emails):
+def send_email(email_subject, msg_txt, email):
     """Shows basic usage of the Gmail API.
     Lists the user's Gmail labels.
     Args:
@@ -51,9 +51,9 @@ def run(email_subject, msg_txt, emails):
 
     service = build('gmail', 'v1', credentials=creds)    
 
-    for email in emails:
-        message = CreateMessage("projectbitfix@gmail.com", email, email_subject, msg_txt)
-        SendMessage(service, "me", message)
+    # for email in emails:
+    message = CreateMessage("projectbitfix@gmail.com", email, email_subject, msg_txt)
+    SendMessage(service, "me", message)
 
 def SendMessage(service, user_id, message):
     """Send an email message.
