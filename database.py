@@ -13,13 +13,11 @@ def parse(file):
 
         # reads the rest of the informational lines
         for line in csv_reader:
-            # print(line)
             # checks if the 5th column contains the case-sensitive word "Volunteer"
             if "Volunteer" in line[4]:
                 volunteers.append(line)
             else:
                 projects.append(line)
-                
     return volunteers, projects
 
 def create_connection(db_file):
@@ -91,4 +89,4 @@ def populate():
                     volunteer[i] = None;
                     
             c.execute('INSERT OR IGNORE INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-                [volunteer[1], volunteer[2], volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
+                [volunteer[1], volunteer[2].strip(), volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])

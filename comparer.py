@@ -24,7 +24,7 @@ def compare():
 			temp = get_issues(proj[0]) # get issues for github repo
 			if temp is not None:
 				issues = temp[::-1]
-				projTech = set(proj[1].split(',') + proj[2].split(',')) # create set of langs & frameworks for proj
+				projTech = set(proj[1].split(', ') + proj[2].split(', ')) # create set of langs & frameworks for proj
 
 				volRanks = []
 				for vol in volunteers:
@@ -50,7 +50,6 @@ def compare():
 							assignments[volRanks[0][0]].append(issue['link'])
 					else:
 						for vol in volRanks:
-							print(proj[0])
 							if len(assignments[vol[0]]) < 3:
 								assignments[vol[0]].append(proj[0])
 							issueWords = set(issue['title'].split(' ')).union(set(issue['labels'])).intersection(keywords) # keywords in issue
