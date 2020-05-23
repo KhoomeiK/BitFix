@@ -22,8 +22,7 @@ def main():
             subject = "BitFix - No new issues today :("
             msg = "Sorry! We couldn't find any new issues for you today!\n"
         
-
-        ########### DO NOT UNCOMMENT THE NEXT LINE!!!!!!!! ########### 
+        ######################### DO NOT UNCOMMENT THE NEXT LINE!!!!!!!! ##########################
         ########### We have to make sure we don't actually send em an email by accident ###########
         # send_email(subject, msg, email)
         
