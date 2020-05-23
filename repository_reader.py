@@ -17,39 +17,42 @@ import json
 def get_issues(repo):
 	issues = []
 
+	# print(repo)
 	# checks if the link is a link to github=
-	if "github.com" in repo:
-		
-		link_parts = repo.split('/')
-		github_index = link_parts.index("github.com")
 
-		# makes sure there are at least two more elements after "github.com"
-		# in the list
-		if len(link_parts) >= github_index + 3:
+	if "github.com" not in repo:
+		return None
+	
+	link_parts = repo.split('/')
+	github_index = link_parts.index("github.com")
 
-			# saves username and repository name from the repo parameter inputted 
-			user_name, repo_name = link_parts[github_index + 1], link_parts[github_index + 2]
+	# makes sure there are at least two more elements after "github.com"
+	# in the list
+	if len(link_parts) >= github_index + 3:
 
-			# gets the JSON String from the GitHub API
-			response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
+		# saves username and repository name from the repo parameter inputted 
+		user_name, repo_name = link_parts[github_index + 1], link_parts[github_index + 2]
 
-			for issue in response.json():
-				if type(issue) == dict:
-					url_list = issue['url'].split("/")
+		# gets the JSON String from the GitHub API
+		response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
 
-					# create unique link for each issue by getting the issue number from each URL
-					issue_link = repo + "/issues/" + url_list[-1]
+		for issue in response.json():
+			if type(issue) == dict:
+				url_list = issue['url'].split("/")
 
-					# save title of issue
-					title = issue['title']
+				# create unique link for each issue by getting the issue number from each URL
+				issue_link = repo + "/issues/" + url_list[-1]
 
-					# populate list of labels
-					labels = []
-					for label in issue["labels"]:
-						labels.append(label["name"])
+				# save title of issue
+				title = issue['title']
 
-					# add each key value pair into dictionary of issues
-					issues.append({'link': issue_link, 'title': title, 'labels': labels})
+				# populate list of labels
+				labels = []
+				for label in issue["labels"]:
+					labels.append(label["name"])
+
+				# add each key value pair into dictionary of issues
+				issues.append({'link': issue_link, 'title': title, 'labels': labels})
 	# print(issues)
 	return issues
 
