@@ -78,7 +78,7 @@ def populate():
         for project in projects:
             for i in range(len(project)):
                 if project[i] == '':
-                    project[i] = None;
+                    project[i] = None
 
             c.execute('INSERT OR IGNORE INTO projects (name, email, phone, type, host, repo, stack, languages, frameworks, category, covid, keep_updated, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
                 [project[1], project[2], project[3], project[4], project[12], project[13], project[16], project[17], project[18], project[19], project[20], project[21], project[23]])
@@ -86,7 +86,7 @@ def populate():
         for volunteer in volunteers:
             for i in range(len(volunteer)):
                 if volunteer[i] == '':
-                    volunteer[i] = None;
+                    volunteer[i] = None
                     
             c.execute('INSERT OR IGNORE INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
                 [volunteer[1], volunteer[2].strip(), volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
