@@ -22,37 +22,38 @@ def get_issues(repo):
 
 	if "github.com" not in repo:
 		return None
-	
+
 	link_parts = repo.split('/')
 	github_index = link_parts.index("github.com")
 
 	# makes sure there are at least two more elements after "github.com"
 	# in the list
-	if len(link_parts) >= github_index + 3:
+	if len(link_parts) < github_index + 3:
+		return None
+		
+	# saves username and repository name from the repo parameter inputted 
+	user_name, repo_name = link_parts[github_index + 1], link_parts[github_index + 2]
 
-		# saves username and repository name from the repo parameter inputted 
-		user_name, repo_name = link_parts[github_index + 1], link_parts[github_index + 2]
+	# gets the JSON String from the GitHub API
+	response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
 
-		# gets the JSON String from the GitHub API
-		response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
+	for issue in response.json():
+		if type(issue) == dict:
+			url_list = issue['url'].split("/")
 
-		for issue in response.json():
-			if type(issue) == dict:
-				url_list = issue['url'].split("/")
+			# create unique link for each issue by getting the issue number from each URL
+			issue_link = repo + "/issues/" + url_list[-1]
 
-				# create unique link for each issue by getting the issue number from each URL
-				issue_link = repo + "/issues/" + url_list[-1]
+			# save title of issue
+			title = issue['title']
 
-				# save title of issue
-				title = issue['title']
+			# populate list of labels
+			labels = []
+			for label in issue["labels"]:
+				labels.append(label["name"])
 
-				# populate list of labels
-				labels = []
-				for label in issue["labels"]:
-					labels.append(label["name"])
-
-				# add each key value pair into dictionary of issues
-				issues.append({'link': issue_link, 'title': title, 'labels': labels})
+			# add each key value pair into dictionary of issues
+			issues.append({'link': issue_link, 'title': title, 'labels': labels})
 	# print(issues)
 	return issues
 
