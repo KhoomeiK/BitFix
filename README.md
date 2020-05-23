@@ -21,3 +21,12 @@ BitFix is a service that connects open source social good projects that need mor
 
 # Spreadsheet
 - Reads spreadsheet containing volunteer and project manager information directly, rather than parsing a downloaded .csv file
+
+# Potential further features to add
+- Can also send them a welcome/confirmation email for BitFix
+- Need to make an email service for project managers as well, maybe about the number of people working on their project?
+- Can also send a sorry email to someone in the beginning of the day if we found no matches, 
+  or we can suggest another issue to them outside of their comfort zone and say this is available 
+  if they want to get out of their comfort zone and give it a try
+- Should trim the name, email, github link, etc. entries. Should also make the names in the proper case-format,
+  such as "John Smith" instead of "JoHN SMith" or "JOHN SMITH"
