@@ -15,28 +15,26 @@ from comparer import compare
 def main():
     populate()
     assignments = compare()
-    subject = "BitFix - Personalized Github Issues for the Day!"
-    # can also add the name of the person in the hello statement later
-    msg = """Hello! Here are some issues from Github projects that require your attention!
-
-    """
 
     for email in assignments:
+        # can also add the name of the person in the hello statement later
+        msg = "Hello! Here are some issues from Github projects that require your attention!\n"
+        subject = "BitFix - Personalized Github Issues for the Day!"
         issues = assignments[email]
-        print(issues)
-        print()
+        
         if len(issues) > 0:
             for issue in issues:
                 msg = msg + "- " + issue + "\n"
         else:
             # send sorry message that we couldn't find anything of relevanc?
+            print(issues)
+            print()
             subject = "BitFix - No new issues today :("
-            msg = "Sorry! We couldn't find any new issues for you today!"
-        
+            msg = "Sorry! We couldn't find any new issues for you today!\n"
         ########### DO NOT UNCOMMENT THE NEXT LINE!!!!!!!! ########### 
         ########### We have to make sure we don't actually send em an email by accident ###########
         # send_email(subject, msg, email)
-    # send_email(subject, msg, "projectbitfix@gmail.com")
+    send_email(subject, msg, "projectbitfix@gmail.com")
 
     # for a in assignments:
     #     print(a)
