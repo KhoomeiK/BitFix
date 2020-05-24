@@ -1,14 +1,15 @@
 import csv
 import sqlite3
 
+
 def parse(file):
     volunteers = []
     projects = []
 
     with open(file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
-        
-        # burns the first title line 
+
+        # burns the first title line
         csv_reader.__next__()
 
         # reads the rest of the informational lines
@@ -20,6 +21,7 @@ def parse(file):
                 projects.append(line)
     return volunteers, projects
 
+
 def create_connection(db_file):
     conn = None
     try:
@@ -28,6 +30,7 @@ def create_connection(db_file):
     except Error as e:
         print(e)
         return conn
+
 
 def create_tables(c):
     projects_table = """CREATE TABLE IF NOT EXISTS projects (
@@ -65,6 +68,7 @@ def create_tables(c):
     c.execute(volunteers_table)
     # return c
 
+
 def populate():
     database = 'database.db'
     # conn = create_connection(database)
@@ -80,13 +84,13 @@ def populate():
                 if project[i] == '':
                     project[i] = None
 
-            c.execute('INSERT OR IGNORE INTO projects (name, email, phone, type, host, repo, stack, languages, frameworks, category, covid, keep_updated, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-                [project[1], project[2], project[3], project[4], project[12], project[13], project[16], project[17], project[18], project[19], project[20], project[21], project[23]])
+            c.execute('INSERT OR IGNORE INTO projects (name, email, phone, type, host, repo, stack, languages, frameworks, category, covid, keep_updated, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
+                      [project[1], project[2], project[3], project[4], project[12], project[13], project[16], project[17], project[18], project[19], project[20], project[21], project[23]])
 
         for volunteer in volunteers:
             for i in range(len(volunteer)):
                 if volunteer[i] == '':
                     volunteer[i] = None
-                    
-            c.execute('INSERT OR IGNORE INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-                [volunteer[1], volunteer[2].strip(), volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
+
+            c.execute('INSERT OR IGNORE INTO volunteers (name, email, phone, type, role, stack, languages, frameworks, availability, social_good, covid, keep_updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
+                      [volunteer[1], volunteer[2].strip(), volunteer[3], volunteer[4], volunteer[5], volunteer[6], volunteer[7], volunteer[8], volunteer[9], volunteer[10], volunteer[11], volunteer[21]])
