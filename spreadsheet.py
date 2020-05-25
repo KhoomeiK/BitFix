@@ -48,6 +48,7 @@ def main():
         print('No data found.')
     else:
         writeToFile(values)
+
         # print('Name, Major:')
         # print(values[1])
         # for row in values:
@@ -56,7 +57,13 @@ def main():
 
 
 def writeToFile(values):
-    if not os.path.exists('responses.csv'):
+    file = open("responses2.csv", "w")
+    for line in values:
+        for element in line[:-1]:
+            file.write(element + ", ")
+        file.write(line[-1])
+        file.write("\n")
+    file.close()
 
 
 if __name__ == '__main__':
