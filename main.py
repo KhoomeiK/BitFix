@@ -1,34 +1,32 @@
-
-######## Potential further features to add #############
-# 1. can also send them a welcome/confirmation email for BitFix
-# 2. need to make an email service for project managers as well, maybe about the number of people working on their project?
-# 3. can also send a sorry email to someone in the beginning of the day if we found no matches, 
-# 	or we can suggest another issue to them outside of their comfort zone and say this is available 
-# 	if they want to get out of their comfort zone and give it a try
-
-from emailer import run
+from emailer import send_email
 from database import populate
 from comparer import compare
 
 def main():
-	# populate()
-	assignments = compare()
-	print(assignments) # {volEmail: [project links]}
+    populate()
+    assignments = compare()
 
-	subject = "BitFix - Personalized Github Issues for the Day!"
+    for email in assignments:
 
-	# can also add the name of the person in the hello statement later
-	msg = """Hello!
-	Here are some issues from Github projects that require your attention!
-
-	"""
-
-
-
-	# consolidate all the emails you need to send the email to
-	# emails = []
-	# run(subject, msg, emails)
-	# print(msg)
+        # can also add the name of the person in the hello statement later
+        msg = "Hello! Here are some issues from Github projects that require your attention!\n"
+        subject = "BitFix - Personalized Github Issues for the Day!"
+        issues = assignments[email]
+        
+        # if any issues assigned to the user, send it to them
+        if len(issues) > 0:
+            for issue in issues:
+                msg = msg + "- " + issue + "\n"
+        # else send sorry message that we couldn't find anything of relevance
+        else:
+            subject = "BitFix - No new issues today :("
+            msg = "Sorry! We couldn't find any new issues for you today!\n"
+        
+        ######################### DO NOT UNCOMMENT THE NEXT LINE!!!!!!!! ##########################
+        ########### We have to make sure we don't actually send em an email by accident ###########
+        # send_email(subject, msg, email)
+        
+        send_email(subject, msg, "projectbitfix@gmail.com")
 
 if __name__ == '__main__':
     main()

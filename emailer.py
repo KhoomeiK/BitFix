@@ -21,8 +21,10 @@ from apiclient import errors
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.send']
+PERS_EMAIL = "projectbitfix@gmail.com"
 
-def run(email_subject, msg_txt, emails):
+
+def send_email(email_subject, msg_txt, email):
     """Shows basic usage of the Gmail API.
     Lists the user's Gmail labels.
     Args:
@@ -49,11 +51,12 @@ def run(email_subject, msg_txt, emails):
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
-    service = build('gmail', 'v1', credentials=creds)    
+    service = build('gmail', 'v1', credentials=creds)
 
-    for email in emails:
-        message = CreateMessage("projectbitfix@gmail.com", email, email_subject, msg_txt)
-        SendMessage(service, "me", message)
+    # for email in emails:
+    message = CreateMessage(PERS_EMAIL, email, email_subject, msg_txt)
+    SendMessage(service, "me", message)
+
 
 def SendMessage(service, user_id, message):
     """Send an email message.
@@ -69,12 +72,13 @@ def SendMessage(service, user_id, message):
     """
     try:
         message = (service.users().messages().send(userId=user_id, body=message)
-                .execute())
-        print ('Message Id: %s' % message['id'])
+                   .execute())
+        print('Message Id: %s' % message['id'])
         return message
     except (errors.HttpError, error):
         # pass
         print('An error occurred: ', error)
+
 
 def CreateMessage(sender, to, subject, message_text):
     """Create a message for an email.
@@ -107,8 +111,6 @@ def CreateMessage(sender, to, subject, message_text):
     #         print(label['name'])
 
 
-
-
 ##############################################################################################
 
 # from gmail_api_wrapper.crud.write import GmailAPIWriteWrapper
@@ -133,10 +135,8 @@ def CreateMessage(sender, to, subject, message_text):
 #            """
 
 #     # get email from comparer here
-#     emails = "projectbitfix@gmail.com" 
+#     emails = "projectbitfix@gmail.com"
 
 #     # compose new mail
 #     api.compose_mail(subject='Your Daily BitFix Project Issues!', body=body, to=emails)
-
-
-# send_email()
+send_email("subject", "hellooooo testing", PERS_EMAIL)
