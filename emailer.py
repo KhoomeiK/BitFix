@@ -16,9 +16,9 @@ from email.mime.text import MIMEText
 import mimetypes
 import os
 
-from apiclient import errors
+from googleapiclient import errors
 
-# If modifying these scopes, delete the file token.pickle.
+# If modifying these scopes, delete the file token_emailer.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.send']
 PERS_EMAIL = "projectbitfix@gmail.com"
@@ -33,11 +33,11 @@ def send_email(email_subject, msg_txt, email):
         emails: list of emails to send email to
     """
     creds = None
-    # The file token.pickle stores the user's access and refresh tokens, and is
+    # The file token_emailer.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    if os.path.exists('token_emailer.pickle'):
+        with open('token_emailer.pickle', 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -48,7 +48,7 @@ def send_email(email_subject, msg_txt, email):
                 'credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
+        with open('token_emailer.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
     service = build('gmail', 'v1', credentials=creds)
@@ -75,7 +75,7 @@ def SendMessage(service, user_id, message):
                    .execute())
         print('Message Id: %s' % message['id'])
         return message
-    except (errors.HttpError, error):
+    except errors.HttpError as error:
         # pass
         print('An error occurred: ', error)
 
