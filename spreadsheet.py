@@ -4,6 +4,7 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import data_wrapper
 
 import csv
 # from database import parse
@@ -18,10 +19,10 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 #           'https://www.googleapis.com/auth/drive.readonly']
 
 # The ID and name of the spreadsheet.
-SPREADSHEET_ID = '1AC6n9a8mnoAD67URnM7ZjCzEoI0p3odtdUhnOmynGbw'
-SHEET_NAME = 'Form Responses 1'
+SPREADSHEET_ID = data_wrapper.get_sheet_id()
+SHEET_NAME = data_wrapper.get_sheet_name()
 
-def get_sheet():
+def get_sheet_data():
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
     """
