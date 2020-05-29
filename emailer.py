@@ -15,13 +15,14 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import mimetypes
 import os
-
 from googleapiclient import errors
+
+import data_wrapper
 
 # If modifying these scopes, delete the file token_emailer.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose',
           'https://www.googleapis.com/auth/gmail.send']
-PERS_EMAIL = "projectbitfix@gmail.com"
+PERS_EMAIL = data_wrapper.get_email()
 
 
 def send_email(email_subject, msg_txt, email):
