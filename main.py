@@ -2,6 +2,7 @@ from emailer import send_email
 from database import populate
 from comparer import compare
 from spreadsheet import get_sheet
+from data_wrapper import get_email
 
 def main():
     get_sheet_data()
@@ -28,7 +29,7 @@ def main():
         ######## We have to make sure we don't actually send the users an email by accident #######
         # send_email(subject, msg, email)
         
-    # send_email(subject, msg, "projectbitfix@gmail.com")
+    # send_email(subject, msg, data_wrapper.get_email())
 
 if __name__ == '__main__':
     main()
