@@ -139,4 +139,4 @@ def CreateMessage(sender, to, subject, message_text):
 
 #     # compose new mail
 #     api.compose_mail(subject='Your Daily BitFix Project Issues!', body=body, to=emails)
-send_email("subject", "hellooooo testing", PERS_EMAIL)
+# send_email("subject", "hellooooo testing", PERS_EMAIL)

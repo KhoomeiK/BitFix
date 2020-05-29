@@ -26,7 +26,7 @@ def main():
         ######## We have to make sure we don't actually send the users an email by accident #######
         # send_email(subject, msg, email)
         
-        send_email(subject, msg, "projectbitfix@gmail.com")
+    send_email(subject, msg, "projectbitfix@gmail.com")
 
 if __name__ == '__main__':
     main()
