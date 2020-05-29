@@ -31,7 +31,7 @@ def send_email(email_subject, msg_txt, email):
     Args:
         email_subject: subject of email
         msg_txt: String message to send to each email ID
-        emails: list of emails to send email to
+        email: email ID to send email to
     """
     creds = None
     # The file token_emailer.pickle stores the user's access and refresh tokens, and is
@@ -54,7 +54,6 @@ def send_email(email_subject, msg_txt, email):
 
     service = build('gmail', 'v1', credentials=creds)
 
-    # for email in emails:
     message = CreateMessage(PERS_EMAIL, email, email_subject, msg_txt)
     SendMessage(service, "me", message)
 
@@ -65,7 +64,7 @@ def SendMessage(service, user_id, message):
     Args:
         service: Authorized Gmail API service instance.
         user_id: User's email address. The special value "me"
-            can be used to indicate the authenticated user.
+                 can be used to indicate the authenticated user.
         message: Message to be sent.
 
     Returns:

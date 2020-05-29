@@ -47,21 +47,6 @@ def get_sheet_data():
 
     service = build('sheets', 'v4', credentials=creds)
 
-    # file_id = '1sT720pjfbOsJm9fBt1XWJM8e5C_dg6_UGAZg2heTbOw'
-    # request = service.files().get(fileId=file_id, mimeType='application/pdf')
-    # with open('myamazing.pdf', 'w') as f:
-    #     f.write(request.get(values))
-
-    # fh = io.FileIO('test_responses', 'w')
-    # downloader = MediaIoBaseDownload(fh, request)
-    # done = False
-    # while done is False:
-    #     status, done = downloader.next_chunk()
-    #     print ("Download %d%%." % int(status.progress() * 100))
-        # print(status)
-
-
-
     # Call the Sheets API
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SPREADSHEET_ID,
@@ -77,16 +62,6 @@ def get_sheet_data():
             writer = csv.writer(f)
             writer.writerows(values)
         f.close()
-        # parse('test_responses.csv')
-
-
-        # writeToFile(values)
-        # print('Name, Major:')
-        # print(values[1])
-        # for row in values:
-        #     # Print columns A and E, which correspond to indices 0 and 4.
-        #     print('%s, %s' % (row[0], row[4]))
-
 
 # def writeToFile(values):
 #     file = open("responses2.csv", "w")

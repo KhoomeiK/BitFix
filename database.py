@@ -69,7 +69,6 @@ def create_tables(c):
 
     c.execute(projects_table)
     c.execute(volunteers_table)
-    # return c
 
 
 def populate():
