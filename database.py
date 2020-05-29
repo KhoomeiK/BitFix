@@ -16,8 +16,6 @@ def parse(file):
         for line in csv_reader:
             # checks if the 5th column contains the case-sensitive word "Volunteer"
             if line != []:
-                # print(line)
-                # print()
                 if "Volunteer" in line[4]:
                     volunteers.append(line)
                 else:
@@ -79,7 +77,7 @@ def populate():
         c = conn.cursor()
         create_tables(c)
 
-        volunteers, projects = parse('test_responses.csv')
+        volunteers, projects = parse('responses.csv')
 
         for project in projects:
             for i in range(len(project)):

@@ -52,7 +52,7 @@ def get_sheet_data():
     result = sheet.values().get(spreadsheetId=SPREADSHEET_ID,
                                 range=SHEET_NAME).execute()
     
-    output_file = 'test_responses.csv'
+    output_file = 'responses.csv'
     values = result.get('values', [])
 
     if not values:
