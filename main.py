@@ -4,7 +4,7 @@ from comparer import compare
 from spreadsheet import get_sheet
 
 def main():
-    get_sheet()
+    get_sheet_data()
     populate()
     assignments = compare()
 
