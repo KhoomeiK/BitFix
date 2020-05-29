@@ -30,7 +30,6 @@ def compare():
                 issues = temp[::-1]
                 # create set of langs & frameworks for proj
                 projTech = set(proj[1].split(', ') + proj[2].split(', '))
-
                 volRanks = []
                 for vol in volunteers:
                     # create set of langs & frameworks for vol
@@ -46,7 +45,6 @@ def compare():
                         # 		ct += 1
 
                 volRanks = sorted(volRanks, key=lambda x: x[1], reverse=True)
-                # print(volRanks)
                 if len(volRanks) > 0:
                     if len(issues) > 0:
                         for issue in issues:
