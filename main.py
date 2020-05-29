@@ -23,7 +23,7 @@ def main():
             msg = "Sorry! We couldn't find any new issues for you today!\n"
         
         ######################### DO NOT UNCOMMENT THE NEXT LINE!!!!!!!! ##########################
-        ########### We have to make sure we don't actually send em an email by accident ###########
+        ######## We have to make sure we don't actually send the users an email by accident #######
         # send_email(subject, msg, email)
         
         send_email(subject, msg, "projectbitfix@gmail.com")
