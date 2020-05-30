@@ -2,24 +2,10 @@ import requests
 import sqlite3
 import json
 
-# def get_repos():
-# 	issues = {}
-
-# 	database = 'database.db'
-# 	conn = sqlite3.connect(database)
-# 	c = conn.cursor()
-# 	c.execute('SELECT repo FROM projects;')
-# 	repos = c.fetchall()
-	
-# 	for repo in repos:
-# 		get_issues(repo[0])
-
 def get_issues(repo):
 	issues = []
 
-	# print(repo)
-	# checks if the link is a link to github=
-
+	# checks if the link is a link to github
 	if "github.com" not in repo:
 		return None
 
@@ -59,7 +45,6 @@ def get_issues(repo):
 
 			# add each key value pair into dictionary of issues
 			issues.append({'link': issue_link, 'title': title, 'labels': labels})
-	# print(issues)
 	return issues
 
 # get_issues('https://github.com/doc19org/medicam')
