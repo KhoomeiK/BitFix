@@ -15,12 +15,14 @@ BitFix is a service that connects open source social good projects that need mor
 - Sends the Issues to Volunteers over email
 - Automatically sends email to Volunteers every morning
 
-# Devpost COVID-19 Hackathon Entries Web Scraper
-- Grabs all the project submissions to COVID-19 related hackathons, follows their Github link to their repository, and saves the 
-  project if it is open-source and has outstanding issues
-
 # Spreadsheet
-- Reads spreadsheet containing volunteer and project manager information directly, rather than parsing a downloaded .csv file
+- Automatically downloads volunteer and project manager data from online spreadsheet and saves it as a .csv file
+
+# Devpost COVID-19 Hackathon Entries Web Scraper
+- Grabs all the project submissions to COVID-19 related hackathons
+- Follows their Github link to their repository, and saves the project if it is open-source and has outstanding issues
+- How to determine open-source: only 1 branch and at least 1 pull req
+- Can get num branhces and pull reqs using the pagination attribute of Github api, by listing each element per page, and then just checking how many pages there are
 
 # Potential further features to add
 - Can also send them a welcome/confirmation email for BitFix

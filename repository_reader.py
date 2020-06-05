@@ -20,7 +20,7 @@ def get_issues(repo):
 	# saves username and repository name from the repo parameter inputted 
 	user_name, repo_name = link_parts[github_index + 1], link_parts[github_index + 2]
 
-	# gets the JSON String from the GitHub API
+	# gets the JSON-formatted data from the GitHub API
 	response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
 	
 	# checks if Github repo's issues link is invalid (i.e. cannot be found)
