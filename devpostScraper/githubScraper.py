@@ -1,9 +1,14 @@
-# only 1 branch and at least 1 pull req then they're def open source
 import requests
+import sqlite3
+import json
 
-def getData():
-	url = "https://api.github.com/users/Meet-Vora/repos"
-	response = requests.head(url=url)
-	print(response.headers['link'])
+# def get_issues(repo):
+user_name = 'Meet-Vora'
+repo_name = 'Slackbot'
+# gets the JSON-formatted data from the GitHub API
+response = requests.get("https://api.github.com/repos/" + user_name + "/" + repo_name + "/issues")
+print(response)
+print(response.links)
+	
 
-getData()
+# get_issues('https://github.com/doc19org/medicam')
