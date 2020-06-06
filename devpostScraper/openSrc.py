@@ -1,24 +1,25 @@
 from bs4 import BeautifulSoup
 import requests
-from urllib.request import urlopen
+# from urllib.request import urlopen
 
-import requests
-import sqlite3
-import json
+# import requests
+# import sqlite3
+# import json
 
 def scraper(url):
 	# opening up connection, grabbing the page
-	uClient = urlopen(url)
-	page_html = uClient.read()
-	uClient.close()
+	source = requests.get(url).text
 
-	# html parsing
-	soup = BeautifulSoup(page_html, "lxml")
+	# grab number of branches
+	soup = BeautifulSoup(source, "lxml")
 	all_elements = soup.findAll('ul', class_='numbers-summary')[0].findAll('li')
 	num_branches = int(all_elements[1].span.text)
-	num_pull_reqs = all_elements
 
-	print(all_elements)
+	# grab number of pull requests
+	pull_req_header = soup.findAll('a', href='/Meet-Vora/BitFix/pulls')[0]
+	num_pull_reqs = int(pull_req_header.find('span', class_='Counter').text)
+
+	return num_branches, num_pull_reqs
 
 url = "https://github.com/Meet-Vora/BitFix"
 scraper(url)
