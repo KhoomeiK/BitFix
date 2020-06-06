@@ -16,8 +16,12 @@ def scraper(url):
 	num_branches = int(all_elements[1].span.text)
 
 	# grab number of pull requests
-	pull_req_header = soup.findAll('a', href='/Meet-Vora/BitFix/pulls')[0]
-	num_pull_reqs = int(pull_req_header.find('span', class_='Counter').text)
+	pull_req_header = soup.findAll('ul', class_='list-style-none')[8].findAll('li')[1]
+	num_pull_reqs = int(pull_req_header.a.find('span', class_='Counter').text)
+	
+	# print(num_pull_reqs)
+	# pull_req_header = soup.findAll('a', href='/Meet-Vora/BitFix/pulls')[0]
+	# num_pull_reqs = int(pull_req_header.find('span', class_='Counter').text)
 
 	return num_branches, num_pull_reqs
 
